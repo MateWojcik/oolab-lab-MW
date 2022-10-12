@@ -12,7 +12,7 @@ public class Vector2d {
     public String toString(){
         return "(" + this.x + ", "+ this.y +")";
     }
-
+//string format
      boolean follows(Vector2d other){
         if(this.x >= other.x && this.y >= other.y){
             return true;
