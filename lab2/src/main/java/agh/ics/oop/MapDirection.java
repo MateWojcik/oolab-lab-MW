@@ -10,10 +10,20 @@ public enum MapDirection {
     public String toString(){
         if (this.equals(EAST)) return "Wschód";
         if (this.equals(WEST)) return "Zachód";
-        if (this.equals(NORTH)) return "Północ"
+        if (this.equals(NORTH)) return "Północ";
         if (this.equals(SOUTH)) return "Południe";
         return null;
     }
+
+    public MapDirection next()
+    {
+        if (this.equals(EAST)) return SOUTH;
+        if (this.equals(WEST)) return NORTH;
+        if (this.equals(NORTH)) return EAST;
+        if (this.equals(SOUTH)) return WEST;
+        return null;
+    }
+
     public MapDirection previous()
     {
         if (this.equals(EAST)) return NORTH;
