@@ -1,31 +1,34 @@
 package agh.ics.oop;
 
 public class Vector2d {
-    final int x;
-    final int y;
+    public final int x;
+    public final int y;
     public Vector2d(int x, int y){
 
         this.x = x;
         this.y = y;
     }
-
+    public boolean precedes(Vector2d other){
+        if(this.x<= other.x && this.y <= other.y) return true;
+        return false;
+    }
     public String toString(){
         return "(" + this.x + ", "+ this.y +")";
     }
 //string format
-     boolean follows(Vector2d other){
+public boolean follows(Vector2d other){
         if(this.x >= other.x && this.y >= other.y){
             return true;
         }
         return false;
     }
-    Vector2d add(Vector2d other){
+    public Vector2d add(Vector2d other){
         return new Vector2d(this.x+ other.x, this.y+other.y);
     }
-    Vector2d subtract(Vector2d other){
+    public Vector2d subtract(Vector2d other){
         return new Vector2d(this.x- other.x, this.y-other.y);
     }
-    Vector2d upperRight(Vector2d other){
+   public Vector2d upperRight(Vector2d other){
         int x,y;
         if(this.x>other.x){
             x=this.x;
@@ -42,7 +45,7 @@ public class Vector2d {
         return new Vector2d(x, y);
     }
 
-    Vector2d lowerLeft(Vector2d other){
+    public Vector2d lowerLeft(Vector2d other){
         int x,y;
         if(this.x<other.x){
             x=this.x;
@@ -59,7 +62,7 @@ public class Vector2d {
         return new Vector2d(x, y);
     }
 
-    Vector2d opposite(){
+    public Vector2d opposite(){
         return new Vector2d(-this.x,-this.y);
     }
 

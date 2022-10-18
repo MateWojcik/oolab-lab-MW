@@ -1,8 +1,5 @@
 package agh.ics.oop;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-
 public enum MapDirection {
     NORTH, SOUTH, WEST, EAST;
 
@@ -39,4 +36,6 @@ public enum MapDirection {
         if (this.equals(SOUTH)) return new Vector2d(0,-1);
         return null;
     }
+
+
 }
