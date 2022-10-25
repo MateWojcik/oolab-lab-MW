@@ -1,0 +1,5 @@
+jak zaimplementować mechanizm, który wyklucza pojawienie się dwóch zwierząt w tym samym miejscu.?
+
+1. Stworzyć tablicę[dla małej liczy pól]/listę[dla dużel lliczby pól] zajętych pozycji i akutalizwoać ją co wywołanie metody move.
+2. Opakować metodę move tzn.
+Przed jej wykonaniem sprawdzić czy pozycja jest wolna.
