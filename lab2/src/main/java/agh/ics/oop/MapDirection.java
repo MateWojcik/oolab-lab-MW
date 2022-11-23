@@ -1,16 +1,20 @@
 package agh.ics.oop;
 
 public enum MapDirection {
-    NORTH, SOUTH, WEST, EAST;
+    NORTH{
+        public String toString(){
+            return "N";}
+    }, SOUTH{
+        public String toString(){
+            return "S";}
+    }, WEST{
+        public String toString(){
+            return "W";}
+    }, EAST{
+        public String toString(){
+            return "E";}
+    };
 
-
-    public String toString(){
-        if (this.equals(EAST)) return "Wschód";
-        if (this.equals(WEST)) return "Zachód";
-        if (this.equals(NORTH)) return "Północ";
-        if (this.equals(SOUTH)) return "Południe";
-        return null;
-    }
 
     public MapDirection next()
     {

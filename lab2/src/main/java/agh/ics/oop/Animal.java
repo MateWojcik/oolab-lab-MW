@@ -1,28 +1,43 @@
 package agh.ics.oop;
 
-import java.util.Map;
-
-public class Animal {
+public class Animal{
     private MapDirection orientation;
     private Vector2d position;
-
+    private IWorldMap map;
     public Animal(){
         orientation = MapDirection.NORTH;
         position = new Vector2d(2,2);
+    }
 
+    public Animal(IWorldMap map) {
+        orientation = MapDirection.NORTH;
+        position = new Vector2d(2,2);
+        this.map = map;
+    }
+
+    public Animal(IWorldMap map, Vector2d initialPosition) {
+        orientation = MapDirection.NORTH;
+        position = initialPosition;
+        this.map = map;
     }
 
     @Override
     public String toString() {
-        return "Position: "+ position.toString() + ", orientation: " + orientation.toString();
+
+        //oreintationa.toString zwraca pojedyńczą literę
+        return "Position: "+ position.toString() + ", orientation: " + orientation;
     }
 
     boolean isAt(Vector2d position){
         return  this.position.equals(position);
     }
 
-    // fix 4,0
-    public void move(MoveDirection direction){
+   public Vector2d getPosition(){
+        return new Vector2d(position.x, position.y);
+    }
+
+    // dodać implementecje cnmove
+    public void move(MoveDirection direction) {
 
         if(direction.equals(MoveDirection.RIGHT)){
             orientation = orientation.next();
@@ -31,39 +46,40 @@ public class Animal {
         } else if (direction.equals(MoveDirection.FORWARD)) {
             if(orientation.equals(MapDirection.NORTH))
             {
-                if(position.y < 4)
+                if(map.canMoveTo(new Vector2d(position.x, position.y+1 )))
                     position =position.add(new Vector2d(0,1));}
             else if (orientation.equals(MapDirection.SOUTH)) {
-                if(position.y > 0)
+                if(map.canMoveTo(new Vector2d(position.x, position.y-1 )))
                     position =position.add(new Vector2d(0,-1));
             }
             else if (orientation.equals(MapDirection.EAST)) {
-                if(position.x < 4)
+                if(map.canMoveTo(new Vector2d(position.x+1, position.y)))
                     position =position.add(new Vector2d(1,0));
             }
             else if (orientation.equals(MapDirection.WEST)) {
-                if(position.x > 0)
+                if(map.canMoveTo(new Vector2d(position.x-1, position.y)))
                     position =position.add(new Vector2d(-1,0));
             }
 
         } else if (direction.equals(MoveDirection.BACKWARD)) {
             if(orientation.equals(MapDirection.NORTH))
             {
-                if(position.y > 0)
+                if(map.canMoveTo(new Vector2d(position.x, position.y-1 )))
                     position =position.add(new Vector2d(0,-1));}
             else if (orientation.equals(MapDirection.SOUTH)) {
-                if(position.y < 4)
+                if(map.canMoveTo(new Vector2d(position.x, position.y+1 )))
                     position =position.add(new Vector2d(0,1));
             }
             else if (orientation.equals(MapDirection.EAST)) {
-                if(position.x > 0)
+                if(map.canMoveTo(new Vector2d(position.x-1, position.y)))
                     position = position.add(new Vector2d(-1,0));
             }
             else if (orientation.equals(MapDirection.WEST)) {
-                if(position.x < 4)
+                if(map.canMoveTo(new Vector2d(position.x+1, position.y)))
                 position = position.add(new Vector2d(1,0));
             }
         }
+        //zmieniłem
 
 
     }
