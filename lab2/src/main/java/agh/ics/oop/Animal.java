@@ -46,8 +46,8 @@ public class Animal{
             case FORWARD -> testMove = this.orientation.toUnitVector();
         }
         Vector2d testPosition = this.position.add(testMove);
-        System.out.println(testPosition);
-        if(this.map.canMoveTo(testPosition) && testPosition.x <10 && testPosition.x>0 && testPosition.y>0  &&testPosition.y<10){
+        //System.out.println(testPosition);
+        if(this.map.canMoveTo(testPosition) && testPosition.x <=10 && testPosition.x>=0 && testPosition.y>=0  &&testPosition.y<=10){
             this.position = this.position.add(testMove);
         }
 

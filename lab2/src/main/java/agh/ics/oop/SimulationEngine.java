@@ -24,7 +24,7 @@ public class SimulationEngine implements IEngine{
     }
 
     public String run(){
-        System.out.println(map);
+        //System.out.println(map);
         int animalsCount = this.animalList.size();
         for(int i = 0; i < moveTab.length; i++){
             //interacja po ani list
