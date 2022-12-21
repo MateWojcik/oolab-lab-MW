@@ -1,42 +1,37 @@
 package agh.ics.oop;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class SimulationEngine implements IEngine{
-    private IWorldMap map;
-    private Vector2d[] aniTab;
-    private boolean[] check;
-    private MoveDirection[] moveTab;
 
-    public SimulationEngine(MoveDirection[] moveTab, IWorldMap map, Vector2d[] animalTab){
+    private final MoveDirection[] moveTab;
+    private final IWorldMap map;
+    public final List<Animal> animalList;
 
-        this.map = map;
-        this.aniTab = animalTab;
+    public SimulationEngine(MoveDirection[] moveTab, IWorldMap map, Vector2d[] posistion){
         this.moveTab = moveTab;
-        check = new boolean[animalTab.length];
+        this.animalList = new LinkedList<>();
+        this.map = map;
 
-        for (int i = 0; i < animalTab.length; i++) {
-            // jeśli uda się dodać zmianiam wartość na flase, jeśli nie to false jest domyślne
-           if(this.map.place(new Animal(map, animalTab[i]))){
-               check[i] = true;
-           }
-        }
-    }
-    @Override
-    public String run() {
-        String last = "";
-        for (int i = 0; i < moveTab.length; i++) {
-            for (int j = 0; j < aniTab.length; j++) {
-                if (check[j] == true) {
-                    Animal a = (Animal) map.objectAt(aniTab[j]);
-                    if( map.canMoveTo(aniTab[j].add(a.getPosition()))){
-                        a.move(moveTab[i]);
-                       last = a.getPosition().toString();
-                    }
-                    break;
-                }
 
+        for (Vector2d vector: posistion){
+            Animal animal = new Animal(this.map, vector);
+            if(this.map.place(animal)){
+                this.animalList.add(animal);
             }
         }
-        return last;
     }
-    
+
+    public String run(){
+        System.out.println(map);
+        int animalsCount = this.animalList.size();
+        for(int i = 0; i < moveTab.length; i++){
+            //interacja po ani list
+            Animal animal = this.animalList.get(i % animalsCount);
+            animal.move(moveTab[i]);
+
+        }
+        return map.toString();
+    }
 }

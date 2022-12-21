@@ -6,20 +6,25 @@ public class World {
 
         Animal zw = new Animal();
         System.out.println(zw.toString());
-
-        zw.move(MoveDirection.RIGHT);
-        zw.move(MoveDirection.FORWARD);
-        zw.move(MoveDirection.FORWARD);
-        zw.move(MoveDirection.FORWARD);
+//
+        zw.move(MoveDirection.BACKWARD);
+        //zw.move(MoveDirection.RIGHT);
         System.out.println(zw.toString());
-
-        Animal zw2 = new Animal();
+//        zw.move(MoveDirection.FORWARD);
+//        zw.move(MoveDirection.FORWARD);
+//        zw.move(MoveDirection.FORWARD);
+//        System.out.println(zw.toString());
+//
+       // Animal zw2 = new Animal(new Wo);
         String[] test = {"r","f","f","f"};
         MoveDirection[] mapDirection = OptionsParser.parse(test);
-        for (int i = 0; i < mapDirection.length; i++) {
-            zw2.move(mapDirection[i]);
+
+       for (int i = 0; i < mapDirection.length; i++) {
+           System.out.println(zw.getPosition());
+            zw.move(MoveDirection.BACKWARD);
         }
-        System.out.println(zw);
+
 //testy
+       // Application.launch(Label_Test.class, args);
     }
 }

@@ -10,14 +10,14 @@ public class Animal{
     }
 
     public Animal(IWorldMap map) {
-        orientation = MapDirection.NORTH;
-        position = new Vector2d(2,2);
+        this.orientation = MapDirection.NORTH;
+        this.position = new Vector2d(2,2);
         this.map = map;
     }
 
     public Animal(IWorldMap map, Vector2d initialPosition) {
-        orientation = MapDirection.NORTH;
-        position = initialPosition;
+        this.orientation = MapDirection.NORTH;
+        this.position = initialPosition;
         this.map = map;
     }
 
@@ -25,7 +25,7 @@ public class Animal{
     public String toString() {
 
         //oreintationa.toString zwraca pojedyńczą literę
-        return "Position: "+ position.toString() + ", orientation: " + orientation;
+        return orientation.toString();
     }
 
     boolean isAt(Vector2d position){
@@ -36,57 +36,27 @@ public class Animal{
         return new Vector2d(position.x, position.y);
     }
 
-    // dodać implementecje cnmove
+    // refaktor na metody
     public void move(MoveDirection direction) {
-
-        if(direction.equals(MoveDirection.RIGHT)){
-            orientation = orientation.next();
-        } else if (direction.equals(MoveDirection.LEFT)) {
-            orientation = orientation.previous();
-        } else if (direction.equals(MoveDirection.FORWARD)) {
-            if(orientation.equals(MapDirection.NORTH))
-            {
-                if(map.canMoveTo(new Vector2d(position.x, position.y+1 )))
-                    position =position.add(new Vector2d(0,1));}
-            else if (orientation.equals(MapDirection.SOUTH)) {
-                if(map.canMoveTo(new Vector2d(position.x, position.y-1 )))
-                    position =position.add(new Vector2d(0,-1));
-            }
-            else if (orientation.equals(MapDirection.EAST)) {
-                if(map.canMoveTo(new Vector2d(position.x+1, position.y)))
-                    position =position.add(new Vector2d(1,0));
-            }
-            else if (orientation.equals(MapDirection.WEST)) {
-                if(map.canMoveTo(new Vector2d(position.x-1, position.y)))
-                    position =position.add(new Vector2d(-1,0));
-            }
-
-        } else if (direction.equals(MoveDirection.BACKWARD)) {
-            if(orientation.equals(MapDirection.NORTH))
-            {
-                if(map.canMoveTo(new Vector2d(position.x, position.y-1 )))
-                    position =position.add(new Vector2d(0,-1));}
-            else if (orientation.equals(MapDirection.SOUTH)) {
-                if(map.canMoveTo(new Vector2d(position.x, position.y+1 )))
-                    position =position.add(new Vector2d(0,1));
-            }
-            else if (orientation.equals(MapDirection.EAST)) {
-                if(map.canMoveTo(new Vector2d(position.x-1, position.y)))
-                    position = position.add(new Vector2d(-1,0));
-            }
-            else if (orientation.equals(MapDirection.WEST)) {
-                if(map.canMoveTo(new Vector2d(position.x+1, position.y)))
-                position = position.add(new Vector2d(1,0));
-            }
+        Vector2d testMove = new Vector2d(0,0);
+        switch(direction){
+            case LEFT -> this.orientation = this.orientation.previous();
+            case RIGHT -> this.orientation = this.orientation.next();
+            case BACKWARD -> testMove = this.orientation.toUnitVector().opposite();
+            case FORWARD -> testMove = this.orientation.toUnitVector();
         }
-        //zmieniłem
-
+        Vector2d testPosition = this.position.add(testMove);
+        System.out.println(testPosition);
+        if(this.map.canMoveTo(testPosition) && testPosition.x <10 && testPosition.x>0 && testPosition.y>0  &&testPosition.y<10){
+            this.position = this.position.add(testMove);
+        }
 
     }
 
 
 
 }
+
 
 
 
